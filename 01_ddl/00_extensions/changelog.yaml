@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-enable-uuid-extension
+      author: corhuila
+      logicalFilePath: db/changelog/changes/001_base/001_enable_uuid_extension.sql
+      labels: "BD-01-dev,ddl,base,extensions"
+      comment: Enables the uuid-ossp extension for the database baseline.
+      changes:
+        - sqlFile:
+            path: 001_enable_uuid_extension.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/00_extensions/001_enable_uuid_extension.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

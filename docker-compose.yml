@@ -1,0 +1,47 @@
+name: shopping-cart-db
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres-db-evaluacion
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-modelo_bd_evaluacion}
+      POSTGRES_USER: ${POSTGRES_USER:-freinercardona}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-29052009}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-freinercardona} -d ${POSTGRES_DB:-modelo_bd_evaluacion}"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  liquibase:
+    build:
+      context: .
+      dockerfile: docker/liquibase/Dockerfile
+    container_name: liquibase-runner-evaluacion
+    depends_on:
+      postgres:
+        condition: service_healthy
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    command: update
+    entrypoint:
+      - liquibase
+      - --search-path=/workspace
+      - --changeLogFile=changelog-master.yaml
+      - --url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-modelo_bd_evaluacion}
+      - --username=${POSTGRES_USER:-freinercardona}
+      - --password=${POSTGRES_PASSWORD:-29052009}
+    restart: "no"
+
+volumes:
+  postgres_data:
