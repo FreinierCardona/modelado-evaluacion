@@ -1,1 +1,1 @@
-# HU-001: Identificar y documentar dominios funcionales del modelo existente. 
+# HU-02 : Creacion de ADRs
