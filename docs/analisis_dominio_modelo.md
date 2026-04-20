@@ -1,3 +1,5 @@
+
+---
 # Análisis de Dominio — Modelo de Datos PostgreSQL
 
 > **Autor:** Freinier Steven Cardona Perez
@@ -5,6 +7,93 @@
 > **Fuente:** `modelo_postgresql.sql`
 
 ---
+
+## Introducción
+
+El esquema SQL corresponde a una plataforma integral de operaciones para aerolíneas: cubre geografía y referencia, identidad, flota y mantenimiento, planificación y ejecución de vuelos, reservas y emisión de tiquetes, embarque, lealtad de clientes y el ciclo financiero (pagos y facturación). El modelo está diseñado con un enfoque fuertemente normalizado (3FN), uso de UUID como identificadores y columnas de auditoría (`created_at`, `updated_at`) extendidas.
+
+Se observa un patrón multi-tenant lógico basado en `airline_id` —muchas tablas operativas están relacionadas con la aerolínea— lo que facilita soportar varias compañías en el mismo esquema. El modelo prioriza integridad referencial, trazabilidad temporal y catálogos de referencia bien definidos.
+
+## Identificación de Dominios Funcionales
+
+| Dominio | Propósito | Tablas principales |
+|---|---|---|
+| Geografía y Datos de Referencia | Catálogos y jerarquía geográfica reutilizable | continent, country, state_province, city, district, address, time_zone, currency |
+| Aerolínea (Tenant) | Operador principal / discriminador lógico multi-tenant | airline |
+| Identidad y Personas | Modelo `Party` para pasajeros, agentes y empleados | person, person_type, document_type, person_document, contact_type, person_contact |
+| Seguridad y RBAC | Autenticación y autorización basada en roles/permiso | user_account, user_status, security_role, security_permission, user_role, role_permission |
+| Clientes y Lealtad | Gestión de clientes, cuentas y transacciones de millas | customer, customer_category, loyalty_program, loyalty_tier, loyalty_account, loyalty_account_tier, miles_transaction, customer_benefit, benefit_type |
+| Aeropuertos e Infraestructura | Infraestructura aeroportuaria y regulaciones | airport, terminal, boarding_gate, runway, airport_regulation, address |
+| Flota y Mantenimiento | Inventario de aeronaves, configuración de cabinas y eventos de mantenimiento | aircraft_manufacturer, aircraft_model, aircraft, cabin_class, aircraft_cabin, aircraft_seat, maintenance_provider, maintenance_type, maintenance_event |
+| Operaciones de Vuelo | Planificación y ejecución de vuelos y segmentos | flight, flight_status, flight_segment, flight_delay, delay_reason_type |
+| Ventas, Reservas y Boletería | Flujo comercial desde PNR hasta emisión de tiquetes | reservation, reservation_status, reservation_passenger, sale_channel, sale, fare_class, fare, ticket, ticket_status, ticket_segment, seat_assignment, baggage |
+| Embarque | Check-in, pases y validación en puerta | check_in, check_in_status, boarding_group, boarding_pass, boarding_validation, boarding_gate |
+| Pagos y Facturación | Cobros, transacciones, reembolsos y facturación | payment, payment_status, payment_method, payment_transaction, refund, invoice, invoice_status, invoice_line, tax, exchange_rate, currency |
+
+## Análisis de Entidades Principales
+
+| Entidad | Rol en el negocio | Por qué es pivote |
+|---|---|---|
+| `airline` | Operador principal del sistema | Casi toda entidad operativa lleva `airline_id`; exclusivo discriminador lógico multi-tenant |
+| `person` | Actor humano universal | Unifica pasajero, cliente, agente y usuario bajo un único registro de identidad |
+| `customer` | Relación comercial persona ↔ aerolínea | Sirve de raíz para `loyalty_account` y segmentación comercial por operador |
+| `reservation` | Raíz del flujo de booking | Orquesta `reservation_passenger`, `sale` y `ticket`; PNR como entidad agregadora |
+| `sale` / `ticket` | Registro económico y documento de viaje | `sale` materializa la transacción; `ticket` es el artefacto de viaje ligado a pasajero y tarifa |
+| `ticket_segment` | Puente producto ↔ operación | Conecta el tiquete con `flight_segment` para soportar itinerarios con escalas |
+| `flight_segment` | Unidad mínima operativa del vuelo | Referenciada por `ticket_segment`, `seat_assignment`, `baggage`, `check_in` y `flight_delay` |
+| `aircraft` / `aircraft_cabin` / `aircraft_seat` | Descripción física de la flota y su capacidad | Permiten mapear disponibilidad física de asientos por segmento |
+| `loyalty_account` / `miles_transaction` | Contabilidad de millas | Permiten reconstruir saldos históricos y auditar redenciones |
+| `payment` / `payment_transaction` / `invoice` | Flujo financiero completo | Soportan conciliación y trazabilidad contable de ventas |
+
+## Relaciones Relevantes y Reglas de Negocio
+
+### Relaciones 1:N críticas
+
+| Relación | Cardinalidad | Regla de negocio |
+|---|---:|---|
+| `airline → customer` | 1:N | Un `person` puede ser cliente de múltiples aerolíneas; la relación `customer` es por operador |
+| `flight → flight_segment` | 1:N | Un vuelo puede descomponerse en varios segmentos (escalas) |
+| `reservation → reservation_passenger` | 1:N | Una reserva agrupa varios pasajeros bajo un mismo PNR |
+| `ticket → ticket_segment` | 1:N | Un tiquete puede contener múltiples segmentos de viaje |
+| `sale → ticket` | 1:N | Una venta puede generar varios tiquetes para la misma reserva |
+| `payment → payment_transaction` | 1:N | Un pago puede tener autorizaciones, capturas y reembolsos registrados en transacciones |
+| `invoice → invoice_line` | 1:N | Una factura se compone de líneas facturables independientes |
+
+### Relaciones N:N y tablas puente
+
+| Relación | Tabla puente | Atributos relevantes |
+|---|---|---|
+| `user_account ↔ security_role` | `user_role` | `assigned_at`, `assigned_by_user_id` (auditoría) |
+| `security_role ↔ security_permission` | `role_permission` | `granted_at` (control temporal) |
+| `ticket ↔ flight_segment` | `ticket_segment` | `segment_sequence_no`, `fare_basis_code` (orden y base tarifaria) |
+| `aircraft ↔ cabin_class` | `aircraft_cabin` | `cabin_code`, `deck_number` (configuración física) |
+
+### Reglas de negocio implícitas (resumen)
+
+| Regla | Descripción |
+|---|---|
+| Unicidad de asiento por vuelo | `uq_seat_assignment_flight_seat` evita asignaciones duplicadas del mismo asiento en un `flight_segment` |
+| Integridad del itinerario | FK compuesta en `seat_assignment` garantiza que solo se asignen asientos a segmentos válidos del tiquete |
+| Libro mayor de millas | `miles_transaction` es inmutable en la práctica (`miles_delta <> 0`, tipos `EARN/REDEEM/ADJUST`) |
+| Consistencia temporal | CHECKs garantizan intervalos válidos (fechas de inicio < fin) en vuelos, facturas, mantenimientos, etc. |
+| 1:1 person → user_account | `uq_user_account_person` garantiza una cuenta por persona, mientras que `customer` puede repetirse por aerolínea |
+
+## Conclusión del Modelo
+
+El modelo está bien normalizado (3FN) y refleja buenas prácticas para el dominio aéreo: separación de catálogos, tablas puente para itinerarios, trazabilidad de eventos y restricciones explícitas para integridad de negocio.
+
+### Consideraciones de escalabilidad y mejoras
+
+| Área | Recomendación |
+|---|---|
+| Particionado | Particionar `flight_segment`, `miles_transaction` y `payment_transaction` por rango temporal (service_date/occurred_at) para rendimiento y mantenimiento |
+| Concurrencia | Implementar locking o colas en emisión de `ticket` y asignación de `seat_assignment` para evitar condiciones de carrera |
+| Caching / Materialización | Usar vistas materializadas o cache para disponibilidad de tarifas y búsquedas en tiempo real |
+| Auditoría | Añadir `audit_log` o soporte temporal para cambios más detallados que `updated_at` |
+| Soft delete | Evaluar `deleted_at`/`is_deleted` para cumplir requisitos regulatorios sin perder integridad referencial |
+
+El esquema ofrece una base sólida y flexible; aplicar las recomendaciones permite escalar a producción manteniendo coherencia y capacidad operativa.
+
 
 ## 1. Introducción
 
@@ -243,37 +332,3 @@ Las siguientes tablas actúan como **pivotes de negocio** — son el núcleo alr
 | `ticket ↔ flight_segment` | `ticket_segment` | `segment_sequence_no`, `fare_basis_code` — orden del itinerario y base tarifaria |
 | `aircraft ↔ cabin_class` | `aircraft_cabin` | `deck_number` — soporta aeronaves de doble cubierta (A380) |
 
-### 4.3 Reglas de Negocio Implícitas en el Modelo
-
-- **Unicidad de asiento por vuelo:** La constraint `uq_seat_assignment_flight_seat` sobre `(flight_segment_id, aircraft_seat_id)` garantiza que ningún asiento sea asignado a dos pasajeros en el mismo vuelo.
-- **Integridad del itinerario:** La FK compuesta en `seat_assignment` hacia `ticket_segment(ticket_segment_id, flight_segment_id)` asegura que solo se pueda asignar asiento a un segmento que realmente pertenezca al tiquete del pasajero.
-- **Inmutabilidad contable:** `miles_transaction` con `miles_delta ≠ 0` y tipos `EARN/REDEEM/ADJUST` implementa un libro mayor de millas que no permite editar registros históricos.
-- **Consistencia temporal:** Múltiples constraints `CHECK` verifican que las fechas de inicio sean anteriores a las de fin en documentos, tarifas, mantenimientos, facturas y vuelos.
-- **Segregación de identidad:** Un `person` solo puede tener **un** `user_account` (`uq_user_account_person`), pero puede tener **múltiples** `customer` records (uno por aerolínea).
-
----
-
-## 5. Conclusión del Modelo
-
-### Fortalezas Arquitectónicas
-
-El modelo demuestra un nivel de madurez elevado en varios aspectos:
-
-- **Normalización rigurosa (3FN):** Se evitan columnas calculadas persistidas (totales de facturas, saldo de millas) y se separan los históricos de los estados actuales (`loyalty_account_tier`). Los comentarios en el DDL confirman que estas decisiones son intencionales.
-- **Diseño *multi-tenant* natural:** El uso generalizado de `airline_id` como discriminador permite escalar el sistema a múltiples operadores sin particionado físico.
-- **Trazabilidad nativa:** Todas las tablas tienen `created_at` y `updated_at`. Entidades críticas como `user_role`, `miles_transaction` y `boarding_validation` registran el agente que realizó la acción.
-- **Cobertura del estándar aeronáutico:** La inclusión de códigos IATA/ICAO en aerolíneas y aeropuertos, y la distinción entre tiempos programados y reales, alinean el modelo con estándares internacionales (IATA NDC, ATA iSpec).
-
-### Áreas de Evolución Potencial
-
-| Área | Consideración |
-|---|---|
-| **Auditoría centralizada** | Un log de cambios genérico (tabla `audit_log` o extensión `temporal_tables`) potenciaría el rastreo de modificaciones más allá de `updated_at` |
-| **Soft-deletes** | No existe columna `deleted_at` o `is_deleted`; para entidades reguladas (tiquetes, pagos) puede ser necesario por cumplimiento normativo |
-| **Particionado** | `flight_segment`, `miles_transaction` y `payment_transaction` son candidatos a particionado por rango de fecha a medida que el volumen crezca |
-| **Soporte multilingüe** | Los nombres de catálogos están en un solo idioma; una tabla de traducciones permitiría internacionalización sin alterar el esquema base |
-| **Gestión de inventario de asientos** | El modelo actual no tiene una tabla explícita de disponibilidad/cupos por vuelo y clase; esto suele implementarse como una vista materializada o servicio externo de *inventory management* |
-
-### Valoración Final
-
-> El modelo refleja un diseño **sólido, escalable y bien fundamentado** para una plataforma de operaciones aéreas. Su principal fortaleza es el equilibrio entre normalización estricta y practicidad operativa. Está preparado para crecer en volumen de datos mediante indexación estratégica (ya incluida) y en cobertura funcional mediante la adición de nuevos dominios sin reestructurar los existentes.
