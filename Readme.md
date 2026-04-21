@@ -1,1 +1,1 @@
-HU-03: Organizar la estructura base del repositorio y definir ramas develop, qa y main. 
+HU-04 : Levantar servicios de postgreSQL y liquibase en un contenedor docker
