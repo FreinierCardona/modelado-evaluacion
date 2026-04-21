@@ -1,1 +1,1 @@
-# HU-001: Identificar y documentar dominios funcionales del modelo existente. 
+HU-03: Organizar la estructura base del repositorio y definir ramas develop, qa y main. 
