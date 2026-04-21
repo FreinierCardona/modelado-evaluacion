@@ -1,1 +1,1 @@
-# HU-02 : Creacion de ADRs
+HU-03: Organizar la estructura base del repositorio y definir ramas develop, qa y main. 
