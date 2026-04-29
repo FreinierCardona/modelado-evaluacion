@@ -1,4 +1,4 @@
-name: shopping-cart-db
+name: evaluacion-bd
 
 services:
   postgres:

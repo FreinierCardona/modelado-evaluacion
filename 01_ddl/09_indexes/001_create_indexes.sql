@@ -1,0 +1,70 @@
+
+CREATE INDEX idx_country_continent_id ON sch_geography.country(continent_id);
+CREATE INDEX idx_state_country_id ON sch_geography.state_province(country_id);
+CREATE INDEX idx_city_state_id ON sch_geography.city(state_province_id);
+CREATE INDEX idx_district_city_id ON sch_geography.district(city_id);
+CREATE INDEX idx_address_district_id ON sch_geography.address(district_id);
+
+CREATE INDEX idx_person_person_type_id ON sch_identity.person(person_type_id);
+CREATE INDEX idx_person_nationality_country_id ON sch_identity.person(nationality_country_id);
+CREATE INDEX idx_person_document_person_id ON sch_identity.person_document(person_id);
+CREATE INDEX idx_person_document_number ON sch_identity.person_document(document_number);
+CREATE INDEX idx_person_contact_person_id ON sch_identity.person_contact(person_id);
+CREATE INDEX idx_person_contact_value ON sch_identity.person_contact(contact_value);
+
+CREATE INDEX idx_user_account_status_id ON sch_security.user_account(user_status_id);
+CREATE INDEX idx_user_role_user_account_id ON sch_security.user_role(user_account_id);
+CREATE INDEX idx_user_role_role_id ON sch_security.user_role(security_role_id);
+CREATE INDEX idx_role_permission_role_id ON sch_security.role_permission(security_role_id);
+CREATE INDEX idx_role_permission_permission_id ON sch_security.role_permission(security_permission_id);
+
+CREATE INDEX idx_customer_person_id ON sch_customer_and_loyalty.customer(person_id);
+CREATE INDEX idx_loyalty_program_airline_id ON sch_customer_and_loyalty.loyalty_program(airline_id);
+CREATE INDEX idx_loyalty_account_customer_id ON sch_customer_and_loyalty.loyalty_account(customer_id);
+CREATE INDEX idx_loyalty_account_tier_account_id ON sch_customer_and_loyalty.loyalty_account_tier(loyalty_account_id);
+CREATE INDEX idx_miles_transaction_account_id ON sch_customer_and_loyalty.miles_transaction(loyalty_account_id);
+
+CREATE INDEX idx_airport_address_id ON sch_airport.airport(address_id);
+CREATE INDEX idx_terminal_airport_id ON sch_airport.terminal(airport_id);
+CREATE INDEX idx_boarding_gate_terminal_id ON sch_airport.boarding_gate(terminal_id);
+CREATE INDEX idx_runway_airport_id ON sch_airport.runway(airport_id);
+
+CREATE INDEX idx_aircraft_airline_id ON sch_aircraft.aircraft(airline_id);
+CREATE INDEX idx_aircraft_model_id ON sch_aircraft.aircraft(aircraft_model_id);
+CREATE INDEX idx_aircraft_cabin_aircraft_id ON sch_aircraft.aircraft_cabin(aircraft_id);
+CREATE INDEX idx_aircraft_seat_cabin_id ON sch_aircraft.aircraft_seat(aircraft_cabin_id);
+CREATE INDEX idx_maintenance_event_aircraft_id ON sch_aircraft.maintenance_event(aircraft_id);
+
+CREATE INDEX idx_flight_aircraft_id ON sch_flight_operations.flight(aircraft_id);
+CREATE INDEX idx_flight_service_date ON sch_flight_operations.flight(service_date);
+CREATE INDEX idx_flight_segment_flight_id ON sch_flight_operations.flight_segment(flight_id);
+CREATE INDEX idx_flight_segment_origin_airport_id ON sch_flight_operations.flight_segment(origin_airport_id);
+CREATE INDEX idx_flight_segment_destination_airport_id ON sch_flight_operations.flight_segment(destination_airport_id);
+CREATE INDEX idx_flight_delay_segment_id ON sch_flight_operations.flight_delay(flight_segment_id);
+
+CREATE INDEX idx_fare_class_cabin_class_id ON sch_sales_reservation_and_ticketing.fare_class(cabin_class_id);
+CREATE INDEX idx_fare_airline_id ON sch_sales_reservation_and_ticketing.fare(airline_id);
+CREATE INDEX idx_reservation_status_id ON sch_sales_reservation_and_ticketing.reservation(reservation_status_id);
+CREATE INDEX idx_reservation_booked_by_customer_id ON sch_sales_reservation_and_ticketing.reservation(booked_by_customer_id);
+CREATE INDEX idx_reservation_passenger_person_id ON sch_sales_reservation_and_ticketing.reservation_passenger(person_id);
+CREATE INDEX idx_sale_reservation_id ON sch_sales_reservation_and_ticketing.sale(reservation_id);
+CREATE INDEX idx_ticket_sale_id ON sch_sales_reservation_and_ticketing.ticket(sale_id);
+CREATE INDEX idx_ticket_reservation_passenger_id ON sch_sales_reservation_and_ticketing.ticket(reservation_passenger_id);
+CREATE INDEX idx_ticket_segment_ticket_id ON sch_sales_reservation_and_ticketing.ticket_segment(ticket_id);
+CREATE INDEX idx_ticket_segment_flight_segment_id ON sch_sales_reservation_and_ticketing.ticket_segment(flight_segment_id);
+CREATE INDEX idx_seat_assignment_aircraft_seat_id ON sch_sales_reservation_and_ticketing.seat_assignment(aircraft_seat_id);
+CREATE INDEX idx_baggage_ticket_segment_id ON sch_sales_reservation_and_ticketing.baggage(ticket_segment_id);
+
+CREATE INDEX idx_check_in_status_id ON sch_boarding.check_in(check_in_status_id);
+CREATE INDEX idx_boarding_pass_check_in_id ON sch_boarding.boarding_pass(check_in_id);
+CREATE INDEX idx_boarding_validation_boarding_pass_id ON sch_boarding.boarding_validation(boarding_pass_id);
+
+CREATE INDEX idx_payment_sale_id ON sch_payment.payment(sale_id);
+CREATE INDEX idx_payment_status_id ON sch_payment.payment(payment_status_id);
+CREATE INDEX idx_payment_transaction_payment_id ON sch_payment.payment_transaction(payment_id);
+CREATE INDEX idx_refund_payment_id ON sch_payment.refund(payment_id);
+
+CREATE INDEX idx_exchange_rate_from_to_date ON sch_billing.exchange_rate(from_currency_id, to_currency_id, effective_date);
+CREATE INDEX idx_invoice_sale_id ON sch_billing.invoice(sale_id);
+CREATE INDEX idx_invoice_status_id ON sch_billing.invoice(invoice_status_id);
+CREATE INDEX idx_invoice_line_invoice_id ON sch_billing.invoice_line(invoice_id);

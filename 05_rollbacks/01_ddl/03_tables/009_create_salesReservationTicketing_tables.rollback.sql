@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.baggage CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.seat_assignment CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.ticket_segment CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.ticket CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.sale CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.reservation_passenger CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.reservation CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.ticket_status CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.fare CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.fare_class CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.sale_channel CASCADE;
+DROP TABLE IF EXISTS sch_sales_reservation_and_ticketing.reservation_status CASCADE;

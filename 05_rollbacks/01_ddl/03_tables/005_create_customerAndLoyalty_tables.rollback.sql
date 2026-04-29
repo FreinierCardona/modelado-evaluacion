@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS sch_customer_and_loyalty.customer_benefit CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.miles_transaction CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.loyalty_account_tier CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.loyalty_account CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.customer CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.loyalty_tier CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.loyalty_program CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.benefit_type CASCADE;
+DROP TABLE IF EXISTS sch_customer_and_loyalty.customer_category CASCADE;

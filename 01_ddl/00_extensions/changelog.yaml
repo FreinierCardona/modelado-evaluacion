@@ -1,1 +1,33 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-enable-uuid-extension
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_enable_uuid_extension.sql
+      labels: "HU-05-dev,ddl,base,extensions"
+      comment: Habilita la extensión uuid-ossp para la línea base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_enable_uuid_extension.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/00_extensions/001_enable_uuid_extension.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 002-enable-pgcrypto-extension
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/002_enable_pgcrypto_extension.sql
+      labels: "HU-05-dev,ddl,base,extensions"
+      comment: Habilita la extensión pgcrypto para la línea base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 002_enable_pgcrypto_extension.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/00_extensions/002_enable_pgcrypto_extension.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
