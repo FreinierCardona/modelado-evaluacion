@@ -1,1 +1,1 @@
-HU-04 : Levantar servicios de postgreSQL y liquibase en un contenedor docker
+HU-05: Separar DDL en changelogs porr Dominio Funcionales
