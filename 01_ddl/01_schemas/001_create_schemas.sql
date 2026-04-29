@@ -1,0 +1,12 @@
+CREATE SCHEMA IF NOT EXISTS sch_geography;
+CREATE SCHEMA IF NOT EXISTS sch_airline;
+CREATE SCHEMA IF NOT EXISTS sch_identity;
+CREATE SCHEMA IF NOT EXISTS sch_security;
+CREATE SCHEMA IF NOT EXISTS sch_customer_and_loyalty;
+CREATE SCHEMA IF NOT EXISTS sch_airport;
+CREATE SCHEMA IF NOT EXISTS sch_aircraft;
+CREATE SCHEMA IF NOT EXISTS sch_flight_operations;
+CREATE SCHEMA IF NOT EXISTS sch_sales_reservation_and_ticketing;
+CREATE SCHEMA IF NOT EXISTS sch_boarding;
+CREATE SCHEMA IF NOT EXISTS sch_payment;
+CREATE SCHEMA IF NOT EXISTS sch_billing;

@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS sch_aircraft.maintenance_event CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.maintenance_type CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.maintenance_provider CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.aircraft_seat CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.aircraft_cabin CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.aircraft CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.cabin_class CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.aircraft_model CASCADE;
+DROP TABLE IF EXISTS sch_aircraft.aircraft_manufacturer CASCADE;
