@@ -1,0 +1,12 @@
+DROP SCHEMA IF EXISTS sch_geography;
+DROP SCHEMA IF EXISTS sch_airline;
+DROP SCHEMA IF EXISTS sch_identity;
+DROP SCHEMA IF EXISTS sch_security;
+DROP SCHEMA IF EXISTS sch_customer_and_loyalty;
+DROP SCHEMA IF EXISTS sch_airport;
+DROP SCHEMA IF EXISTS sch_aircraft;
+DROP SCHEMA IF EXISTS sch_flight_operations;
+DROP SCHEMA IF EXISTS sch_sales_reservation_and_ticketing;
+DROP SCHEMA IF EXISTS sch_boarding;
+DROP SCHEMA IF EXISTS sch_payment;
+DROP SCHEMA IF EXISTS sch_billing;
