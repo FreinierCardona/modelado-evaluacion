@@ -1,1 +1,17 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-create-schemas
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_create_schemas.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea los esquemas para la línea base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_create_schemas.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/01_schemas/001_create_schemas.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
