@@ -1,1 +1,17 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-create-indexes
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_create_indexes.sql
+      labels: "HU-05-dev,ddl,base,indexes"
+      comment: Crea los índices para la línea base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_create_indexes.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/09_indexes/001_create_indexes.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

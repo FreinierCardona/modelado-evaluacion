@@ -1,1 +1,194 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-create-geography-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_create_geography_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo geografia en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_create_geography_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_geography_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+
+ - changeSet:
+      id: 002-create-airline-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/002_create_airline_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo aerolineas en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 002_create_airline_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_airline_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 003-create-identity-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/003_create_identity_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo identidad en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 003_create_identity_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_identity_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 004-create-security-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/004_create_security_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo seguridad en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 004_create_security_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/004_create_security_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 005-create-customerAndLoyalty-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/005_create_customerAndLoyalty_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo clientes y fidelizacion en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 005_create_customerAndLoyalty_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/005_create_customerAndLoyalty_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 006-create-airport-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/006_create_airport_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo aeropuertos en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 006_create_airport_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/006_create_airport_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 007-create-aircraft-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/007_create_aircraft_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo aviones en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 007_create_aircraft_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/007_create_aircraft_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 008-create-flightOperations_tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/008_create_flightOperations_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo operaciones de vuelo en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 008_create_flightOperations_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/008_create_flightOperations_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 009-create-salesReservationTicketing_tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/009_create_salesReservationTicketing_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo ventas, reservas y ticketing en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 009_create_salesReservationTicketing_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/009_create_salesReservationTicketing_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 010-create-boarding-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/010_create_boarding_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo embarque en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 010_create_boarding_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/010_create_boarding_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 011-create-payment-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/011_create_payment_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo pagos en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 011_create_payment_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/011_create_payment_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 012-create-billing-tables
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/012_create_billing_tables.sql
+      labels: "HU-05-dev,ddl,base,schemas"
+      comment: Crea las tablas para el modulo facturación en la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 012_create_billing_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/012_create_billing_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
