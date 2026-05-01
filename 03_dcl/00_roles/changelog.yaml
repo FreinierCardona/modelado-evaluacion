@@ -1,1 +1,17 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-create-roles
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_create_roles.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea los roles para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_create_roles.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/00_roles/001_create_roles.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
