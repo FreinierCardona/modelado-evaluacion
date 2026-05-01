@@ -1,0 +1,40 @@
+
+-- Revocar privilegios a nivel de base de datos y esquemas otorgados a role_db_admin
+
+REVOKE CONNECT, TEMPORARY, CREATE ON DATABASE modelo_bd_evaluacion FROM role_db_admin;
+
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_geography FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_airline FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_identity FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_security FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_customer_and_loyalty FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_airport FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_aircraft FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_flight_operations FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_sales_reservation_and_ticketing FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_boarding FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_payment FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA sch_billing FROM role_db_admin;
+
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_geography FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_airline FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_identity FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_security FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_customer_and_loyalty FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_airport FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_aircraft FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_flight_operations FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_sales_reservation_and_ticketing FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_boarding FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_payment FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA sch_billing FROM role_db_admin;
+
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_geography FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_airline FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_security FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_customer_and_loyalty FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_flight_operations FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_sales_reservation_and_ticketing FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_boarding FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_payment FROM role_db_admin;
+REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA sch_billing FROM role_db_admin;
