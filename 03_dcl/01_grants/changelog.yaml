@@ -1,1 +1,115 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-schema-usage
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_schema_usage.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Usa los esquemas para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_schema_usage.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/001_schema_usage.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 002-grant-read-only
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/002_grant_read_only.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea el rol de lectura solo para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 002_grant_read_only.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/002_grant_read_only.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 003-grant-data-analyst
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/003_grant_data_analyst.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea el rol de analista de datos para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 003_grant_data_analyst.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/003_grant_data_analyst.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 004-grant-app-service
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/004_grant_app_service.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea el rol de servicio de aplicación para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 004_grant_app_service.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/004_grant_app_service.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 005-grant-db-developer
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/005_grant_db_developer.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea el rol de desarrollador de base de datos para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 005_grant_db_developer.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/005_grant_db_developer.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 006-grant-db-admin
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/006_grant_db_admin.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Crea el rol de administrador de base de datos para el manejo de la base de datos.
+      changes:
+        - sqlFile:
+            path: 006_grant_db_admin.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/006_grant_db_admin.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 007-default-privileges
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/007_default_privileges.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Establece privilegios por defecto para los usuarios.
+      changes:
+        - sqlFile:
+            path: 007_default_privileges.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/01_grants/007_default_privileges.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false 
+              

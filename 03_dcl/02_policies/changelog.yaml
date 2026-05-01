@@ -1,1 +1,33 @@
 databaseChangeLog:
+ - changeSet:
+      id: 001-rls-customer_loyalty
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_rls_customer_loyalty.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Establece reglas de seguridad a nivel de fila para la tabla customer_loyalty.
+      changes:
+        - sqlFile:
+            path: 001_rls_customer_loyalty.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/02_policies/001_rls_customer_loyalty.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 002-rls-reservation
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/002_rls_reservation.sql
+      labels: "HU-06-dev,ddl,base,roles"
+      comment: Establece reglas de seguridad a nivel de fila para la tabla reservation.
+      changes:
+        - sqlFile:
+            path: 002_rls_reservation.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/03_dcl/02_policies/002_rls_reservation.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
