@@ -1,1 +1,1 @@
-HU-05: Separar DDL en changelogs porr Dominio Funcionales
+HU-07: Plan de Insercion de Datos de Pruebas
