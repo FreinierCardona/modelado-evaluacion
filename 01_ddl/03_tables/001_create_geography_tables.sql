@@ -69,6 +69,7 @@ CREATE TABLE sch_geography.address (
     longitude numeric(10, 7),
     created_at timestamptz NOT NULL DEFAULT now(),
     updated_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT uq_address_district_line1 UNIQUE (district_id, address_line_1),
     CONSTRAINT ck_address_latitude CHECK (latitude IS NULL OR latitude BETWEEN -90 AND 90),
     CONSTRAINT ck_address_longitude CHECK (longitude IS NULL OR longitude BETWEEN -180 AND 180)
 );

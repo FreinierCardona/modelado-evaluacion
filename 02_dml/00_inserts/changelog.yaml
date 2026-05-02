@@ -1,1 +1,193 @@
 databaseChangeLog:
+ - changeSet:
+      id: 000-inserts-sch-geography
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/000_inserts_sch_geography.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-geography para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 000_inserts_sch_geography.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/000_inserts_sch_geography.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 001-inserts-sch-airline
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/001_inserts_sch_airline.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-airline para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 001_inserts_sch_airline.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/001_inserts_sch_airline.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 002-inserts-sch-identity
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/002_inserts_sch_identity.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-identity para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 002_inserts_sch_identity.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/002_inserts_sch_identity.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 003-inserts-sch-security
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/003_inserts_sch_security.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-security para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 003_inserts_sch_security.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/003_inserts_sch_security.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 004-inserts-sch-customer-and-loyalty
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/004_inserts_sch_customer_and_loyalty.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-customer-and-loyalty para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 004_inserts_sch_customer_and_loyalty.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/004_inserts_sch_customer_and_loyalty.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 005-inserts-sch-airport
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/005_inserts_sch_airport.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-airport para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 005_inserts_sch_airport.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/005_inserts_sch_airport.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 006-inserts-sch-aircraft
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/006_inserts_sch_aircraft.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-aircraft para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 006_inserts_sch_aircraft.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/006_inserts_sch_aircraft.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 007-inserts-sch-flight-operations
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/007_inserts_sch_flight_operations.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-flight-operations para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 007_inserts_sch_flight_operations.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/007_inserts_sch_flight_operations.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 008-inserts-sch-sales-reservation-and-ticketing
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/008_inserts_sch_sales_reservation_and_ticketing.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-sales-reservation-and-ticketing para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 008_inserts_sch_sales_reservation_and_ticketing.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/008_inserts_sch_sales_reservation_and_ticketing.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 009-inserts-sch-boarding
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/009_inserts_sch-boarding.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-boarding para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 009_inserts_sch_boarding.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/009_inserts_sch_boarding.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 010-inserts-sch-payment
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/010_inserts_sch_payment.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-payment para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 010_inserts_sch_payment.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/010_inserts_sch_payment.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+ - changeSet:
+      id: 011-inserts-sch-billing
+      author: FreinierCardona
+      logicalFilePath: db/changelog/changes/001_base/011_inserts_sch_billing.sql
+      labels: "HU-07-dev,inserts,base,schemas"
+      comment: Inserta los datos en el schema sch-billing para el buen funcionamiento de la base de la base de datos.
+      changes:
+        - sqlFile:
+            path: 011_inserts_sch_billing.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/011_inserts_sch_billing.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
